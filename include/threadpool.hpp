@@ -21,8 +21,8 @@ namespace gsc_concurrency
 		std::atomic<bool> shutdown;
 	public:
 
-		worker_thread(const size_t threads, s_buf_ptr &buf) :
-			m_threads(threads)
+		worker_thread(const size_t threads, s_buf_ptr &buf)
+			: m_threads(threads)
 			, m_tasks_buf(buf)
 			, shutdown(false)
 		{}
@@ -63,10 +63,10 @@ namespace gsc_concurrency
 		using t_buf = Thread_Safe_Buffer<std::function<void()>>;
 		using s_buf_ptr = std::shared_ptr<t_buf>;
 
-		Threadpool(const size_t pool_size) :
-			m_pool_size(pool_size)
-			,m_tasks(std::make_shared<t_buf>())
-			,m_worker(pool_size,m_tasks)
+		Threadpool(const size_t pool_size)
+			: m_pool_size(pool_size)
+			, m_tasks(std::make_shared<t_buf>())
+			, m_worker(pool_size,m_tasks)
 		{}
 		~Threadpool()
 		{
